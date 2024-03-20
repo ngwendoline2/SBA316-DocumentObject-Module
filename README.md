@@ -8,3 +8,5 @@ steps on how I prepared my landing zone:
 -Creat a js  folder and script.js file, styles folder and style.css file, index.html file
 and link them.
 -went to github.com, create a  new Repository, copied the code and past in the SBA316...folder in the vscode
+-Cach a todo list elt using document.getElementById 
+-Cach a todo list elt using querySelectorAll 

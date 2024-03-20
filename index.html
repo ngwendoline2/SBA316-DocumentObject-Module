@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>To-Do List</title>
+    <title>To-Do List with Element Caching</title>
 </head>
 <body>
-    <div id="app">
-        <h2>My To-Do List</h2>
+    <div id="todo-app">
+        <input type="text" id="new-item-text" placeholder="What needs to be done?">
+        <button id="add-item">Add To-Do</button>
         <ul id="todo-list">
-            <li>Learn JavaScript</li>
-            <li>Build a to-do list</li>
-        </ul>
-        <input type="text" id="new-item-text" placeholder="Add new item...">
-        <button id="add-item">Add Item</button>
+            <li class="todo-item">Learn html</li>
+            <li class="todo-item">Learn css</li>
+            <li class="todo-item">Learn JavaScript</li>
+            <li class="todo-item">Explore querySelectorAll</li>
     </div>
 
     <script src="./js/script.js"></script>
