@@ -2,17 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>To-Do List with Element Caching</title>
+    <title>To-Do List with DOM Navigation</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: grey;
+        }
+    </style>
 </head>
 <body>
     <div id="todo-app">
         <input type="text" id="new-item-text" placeholder="What needs to be done?">
         <button id="add-item">Add To-Do</button>
+        </div>
         <ul id="todo-list">
             <li class="todo-item">Learn html</li>
             <li class="todo-item">Learn css</li>
             <li class="todo-item">Learn JavaScript</li>
             <li class="todo-item">Explore querySelectorAll</li>
+            
+            <div id="filter-controls">
+                <button id="show-all">Show All</button>
+                <button id="show-completed">Show Completed</button>
+                <button id="show-incomplete">Show Incomplete</button>
+            </div>
     </div>
 
     <script src="./js/script.js"></script>

@@ -10,3 +10,6 @@ and link them.
 -went to github.com, create a  new Repository, copied the code and past in the SBA316...folder in the vscode
 -Cach a todo list elt using document.getElementById 
 -Cach a todo list elt using querySelectorAll 
+-Add a bit of css within a `<style>` tag in the `<head>` section of html
+-Used parent-child-sibling relationship 
+-Add filter button to html

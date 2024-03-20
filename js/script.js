@@ -26,33 +26,78 @@ function addNewItem() {
 
 // Cache the list element using querySelectorAll
 document.addEventListener('DOMContentLoaded', () => {
-    const itemList = document.querySelector('#todo-list');
-    let items = document.querySelectorAll('.todo-item'); // Cache existing to-do items
-
     const inputField = document.querySelector('#new-item-text');
     const addButton = document.querySelector('#add-item');
+    const itemList = document.querySelector('#todo-list');
 
-    // Function to add a new to-do item
     function addTodoItem(text) {
         if (text.trim() === '') return;
 
         const newItem = document.createElement('li');
         newItem.textContent = text;
         newItem.classList.add('todo-item');
-        itemList.appendChild(newNewItem);
+        itemList.appendChild(newItem);
+        // Ensure each new item gets an event listener
+        newItem.addEventListener('click', toggleCompleted);
 
-        // Update the cached list of items
-        items = document.querySelectorAll('.todo-item');
+        // Clear input field
+        inputField.value = '';
     }
 
     addButton.addEventListener('click', () => {
         const text = inputField.value;
         addTodoItem(text);
-        inputField.value = ''; // Clear input field
     });
 
-    //  Log text content of cached item
-    items.forEach(item => {
-        console.log(item.textContent);
+    // Toggle the 'completed' class on click, and also for the next sibling
+    function toggleCompleted(event) {
+        const currentItem = event.target;
+        currentItem.classList.toggle('completed');
+
+        // If there's a next sibling, toggle its completed state as well
+        if (currentItem.nextElementSibling) {
+            currentItem.nextElementSibling.classList.toggle('completed');
+        }
+    }
+
+    // Add event listeners to existing items
+    document.querySelectorAll('.todo-item').forEach(item => {
+        item.addEventListener('click', toggleCompleted);
+
+        // Iterate a collection of elt to accomplish some task
+        const showAllButton = document.querySelector('#show-all');
+        const showCompletedButton = document.querySelector('#show-completed');
+        const showIncompleteButton = document.querySelector('#show-incomplete');
+    
+        function filterTasks(filter) {
+            const items = document.querySelectorAll('.todo-item');
+    
+            items.forEach(item => {
+                switch (filter) {
+                    case 'all':
+                        item.style.display = '';
+                        break;
+                    case 'completed':
+                        if (item.classList.contains('completed')) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                        break;
+                    case 'incomplete':
+                        if (!item.classList.contains('completed')) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                        break;
+                }
+            });
+        }
+    
+        // Event listeners for the filter buttons
+        showAllButton.addEventListener('click', () => filterTasks('all'));
+        showCompletedButton.addEventListener('click', () => filterTasks('completed'));
+        showIncompleteButton.addEventListener('click', () => filterTasks('incomplete'));
     });
 });
