@@ -13,3 +13,5 @@ and link them.
 -Add a bit of css within a `<style>` tag in the `<head>` section of html
 -Used parent-child-sibling relationship 
 -Add filter button to html
+-create element using createElement
+-used appendChild, ensuring my html includes buttons for adding tasks

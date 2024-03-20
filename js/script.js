@@ -101,3 +101,95 @@ document.addEventListener('DOMContentLoaded', () => {
         showIncompleteButton.addEventListener('click', () => filterTasks('incomplete'));
     });
 });
+
+//Create element using createElement.
+document.addEventListener('DOMContentLoaded', () => {
+    const inputField = document.querySelector('#new-item-text');
+    const addButton = document.querySelector('#add-item');
+    const itemList = document.querySelector('#todo-list');
+
+    function addTodoItem(text) {
+        if (text.trim() === '') return;
+
+        // Create the list item
+        const newItem = document.createElement('li');
+        newItem.textContent = text;
+        newItem.classList.add('todo-item');
+
+        // Create the delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-btn');
+        // Append the delete button to the list item
+        newItem.appendChild(deleteButton);
+
+        // Add the list item to the todo list
+        itemList.appendChild(newItem);
+
+        // Add event listeners
+        newItem.addEventListener('click', toggleCompleted);
+        deleteButton.addEventListener('click', function(e) {
+            // Prevent the list item's click event from firing
+            e.stopPropagation();
+            // Remove the list item from the list
+            newItem.remove();
+        });
+
+        // Clear input field
+        inputField.value = '';
+    }
+
+    addButton.addEventListener('click', () => {
+        const text = inputField.value;
+        addTodoItem(text);
+    });
+
+    // Existing toggleCompleted function...
+});
+
+//used appendChild an
+document.addEventListener('DOMContentLoaded', () => {
+    const addTaskTopBtn = document.getElementById('add-task-top-btn');
+    const addTaskBottomBtn = document.getElementById('add-task-bottom-btn');
+    const tasksList = document.getElementById('tasks-list');
+    const newTaskInput = document.getElementById('new-task-input');
+
+    // Function to create and return a new task item
+    function createTaskItem(taskText) {
+        const taskItem = document.createElement('li');
+        taskItem.textContent = taskText;
+        taskItem.classList.add('todo-item');
+
+        // Optionally add more functionality here (e.g., delete button)
+        
+        return taskItem;
+    }
+
+    // Event listener for adding a task at the top
+    addTaskTopBtn.addEventListener('click', () => {
+        const taskText = newTaskInput.value.trim();
+        if (!taskText) {
+            alert('Please enter a task!');
+            return;
+        }
+
+        const newTaskItem = createTaskItem(taskText);
+        // Prepend the new task item to the list
+        tasksList.prepend(newTaskItem);
+        newTaskInput.value = ''; // Clear the input field
+    });
+
+    // Event listener for adding a task at the bottom
+    addTaskBottomBtn.addEventListener('click', () => {
+        const taskText = newTaskInput.value.trim();
+        if (!taskText) {
+            alert('Please enter a task!');
+            return;
+        }
+
+        const newTaskItem = createTaskItem(taskText);
+        // Append the new task item to the list
+        tasksList.appendChild(newTaskItem);
+        newTaskInput.value = ''; // Clear the input field
+    });
+});
