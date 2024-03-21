@@ -193,3 +193,20 @@ document.addEventListener('DOMContentLoaded', () => {
         newTaskInput.value = ''; // Clear the input field
     });
 });
+
+//template with colneNode
+function addTaskUsingTemplate(taskText) {
+    const tasksList = document.getElementById('tasks-list');
+    const template = document.getElementById('task-template').content;
+    const newTaskItem = template.cloneNode(true);
+
+    newTaskItem.querySelector('.task-text').textContent = taskText;
+
+    // Assuming delete functionality is desired, here's how you could set it up:
+    const deleteBtn = newTaskItem.querySelector('.delete-task-btn');
+    deleteBtn.addEventListener('click', function() {
+        this.parentNode.remove();
+    });
+
+    tasksList.appendChild(newTaskItem);
+}

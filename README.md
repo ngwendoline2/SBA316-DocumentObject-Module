@@ -15,3 +15,5 @@ and link them.
 -Add filter button to html
 -create element using createElement
 -used appendChild, ensuring my html includes buttons for adding tasks
+-create a template content
+-
