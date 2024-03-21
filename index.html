@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>To-Do List with DOM Navigation</title>
+    <title>To-Do List</title>
+    <script defer src="js/script.js"></script>
+    <link rel="stylesheet" href="./styles/style.css">
     <style>
+        body
         .completed {
             text-decoration: line-through;
             color: grey;
@@ -19,7 +22,7 @@
             <li class="todo-item">Learn html</li>
             <li class="todo-item">Learn css</li>
             <li class="todo-item">Learn JavaScript</li>
-            <li class="todo-item">Explore querySelectorAll</li>
+            <li class="todo-item">Explore All</li>
 
             <div id="filter-controls">
                 <button id="show-all">Show All</button>
@@ -36,6 +39,14 @@
                     <div id="task-counter">Tasks: 0</div>
                     <ul id="tasks-list">
                         <!-- Tasks will be added here -->
+                    </ul>
+                </div>
+
+                <div id="todo-app">
+                    <input type="text" id="new-task-input" placeholder="Enter a new task" />
+                    <button id="add-task-btn">Add Task</button>
+                    <ul id="tasks-list">
+                        <!-- Tasks will be added here dynamically -->
                     </ul>
                 </div>
 

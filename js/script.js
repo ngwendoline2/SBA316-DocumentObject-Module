@@ -149,49 +149,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //used appendChild an
 document.addEventListener('DOMContentLoaded', () => {
-    const addTaskTopBtn = document.getElementById('add-task-top-btn');
-    const addTaskBottomBtn = document.getElementById('add-task-bottom-btn');
+    const addTaskBtn = document.getElementById('add-task-btn');
     const tasksList = document.getElementById('tasks-list');
     const newTaskInput = document.getElementById('new-task-input');
 
-    // Function to create and return a new task item
-    function createTaskItem(taskText) {
-        const taskItem = document.createElement('li');
-        taskItem.textContent = taskText;
-        taskItem.classList.add('todo-item');
+    function addTask() {
+        const taskText = newTaskInput.value.trim();
+        if (taskText === '') {
+            alert('Please enter a task!');
+            return;
+        }
 
-        // Optionally add more functionality here (e.g., delete button)
-        
-        return taskItem;
+        // Create the list item and the edit button
+        const newTaskItem = document.createElement('li');
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        newTaskItem.textContent = taskText;
+        newTaskItem.appendChild(editBtn);
+
+        // Adding an event listener to the edit button
+        editBtn.addEventListener('click', () => {
+            const currentText = newTaskItem.childNodes[0].nodeValue.trim();
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.value = currentText;
+
+            // Replace the current task text with an input field
+            newTaskItem.replaceChild(inputField, newTaskItem.childNodes[0]);
+
+            // Change the button text to 'Save'
+            editBtn.textContent = 'Save';
+
+            // Listen for the 'Save' button click
+            editBtn.onclick = () => {
+                const updatedText = inputField.value.trim();
+                newTaskItem.removeChild(inputField);
+                newTaskItem.insertBefore(document.createTextNode(updatedText), editBtn);
+                
+                // Change the button text back to 'Edit'
+                editBtn.textContent = 'Edit';
+                editBtn.onclick = () => editBtn.click(); // Reset back to the original edit functionality
+            };
+        });
+
+        tasksList.appendChild(newTaskItem);
+        newTaskInput.value = '';
     }
 
-    // Event listener for adding a task at the top
-    addTaskTopBtn.addEventListener('click', () => {
-        const taskText = newTaskInput.value.trim();
-        if (!taskText) {
-            alert('Please enter a task!');
-            return;
-        }
-
-        const newTaskItem = createTaskItem(taskText);
-        // Prepend the new task item to the list
-        tasksList.prepend(newTaskItem);
-        newTaskInput.value = ''; // Clear the input field
-    });
-
-    // Event listener for adding a task at the bottom
-    addTaskBottomBtn.addEventListener('click', () => {
-        const taskText = newTaskInput.value.trim();
-        if (!taskText) {
-            alert('Please enter a task!');
-            return;
-        }
-
-        const newTaskItem = createTaskItem(taskText);
-        // Append the new task item to the list
-        tasksList.appendChild(newTaskItem);
-        newTaskInput.value = ''; // Clear the input field
-    });
+    addTaskBtn.addEventListener('click', addTask);
 });
 
 //template with colneNode
@@ -216,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addPredefinedTasksBtn = document.getElementById('add-predefined-tasks-btn');
     const tasksList = document.getElementById('tasks-list');
     const taskCounter = document.getElementById('task-counter');
-
+    
     // Function to update the task counter
     function updateTaskCounter() {
         const taskCount = tasksList.querySelectorAll('.todo-item').length;
@@ -240,4 +245,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // add individual tasks and update the counter accordingly
+});
+
+//Modify the styles 
+document.addEventListener('DOMContentLoaded', () => {
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const tasksList = document.getElementById('tasks-list');
+    const newTaskInput = document.getElementById('new-task-input');
+
+    addTaskBtn.addEventListener('click', () => {
+        const taskText = newTaskInput.value.trim();
+        if (taskText === '') {
+            alert('Please enter a task!');
+            return;
+        }
+
+        const newTaskItem = document.createElement('li');
+        newTaskItem.textContent = taskText;
+        newTaskItem.classList.add('todo-item');
+
+        // Listen for clicks on the task item to toggle completion status
+        newTaskItem.addEventListener('click', () => {
+            newTaskItem.classList.toggle('completed');
+        });
+
+        tasksList.appendChild(newTaskItem);
+        newTaskInput.value = '';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const tasksList = document.getElementById('tasks-list');
+    const newTaskInput = document.getElementById('new-task-input');
+
+    function createTaskElement(taskText) {
+        const taskItem = document.createElement('li');
+        const taskContent = document.createTextNode(taskText);
+        const deleteBtn = document.createElement('button');
+        const completeBtn = document.createElement('button');
+
+        deleteBtn.textContent = 'Delete';
+        completeBtn.textContent = 'Complete';
+
+        // Register event listener for marking task as completed
+        completeBtn.addEventListener('click', function() {
+            taskItem.classList.toggle('completed');
+        });
+
+        // Register event listener for deleting the task
+        deleteBtn.addEventListener('click', function() {
+            tasksList.removeChild(taskItem);
+        });
+
+        taskItem.appendChild(taskContent);
+        taskItem.appendChild(completeBtn);
+        taskItem.appendChild(deleteBtn);
+
+        return taskItem;
+    }
+
+    function addTask() {
+        const taskText = newTaskInput.value.trim();
+        if (taskText === '') {
+            alert('Please enter a task!');
+            return;
+        }
+
+        const taskItem = createTaskElement(taskText);
+        tasksList.appendChild(taskItem);
+        newTaskInput.value = ''; // Clear input field after adding
+    }
+
+    addTaskBtn.addEventListener('click', addTask);
 });

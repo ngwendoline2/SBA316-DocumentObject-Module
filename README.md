@@ -17,3 +17,4 @@ and link them.
 -used appendChild, ensuring my html includes buttons for adding tasks
 -create a template content
 -modify html using innerhtml and innerText
+-Modify the style
