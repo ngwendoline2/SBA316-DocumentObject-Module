@@ -210,3 +210,34 @@ function addTaskUsingTemplate(taskText) {
 
     tasksList.appendChild(newTaskItem);
 }
+
+//Modify html using innerHTML and innerText.
+document.addEventListener('DOMContentLoaded', () => {
+    const addPredefinedTasksBtn = document.getElementById('add-predefined-tasks-btn');
+    const tasksList = document.getElementById('tasks-list');
+    const taskCounter = document.getElementById('task-counter');
+
+    // Function to update the task counter
+    function updateTaskCounter() {
+        const taskCount = tasksList.querySelectorAll('.todo-item').length;
+        taskCounter.innerText = `Tasks: ${taskCount}`; // Using innerText to modify content
+    }
+
+    addPredefinedTasksBtn.addEventListener('click', () => {
+        const predefinedTasks = ['Learn JavaScript', 'Read about DocumentFragment', 'Build a to-do list app'];
+        const fragment = document.createDocumentFragment();
+
+        predefinedTasks.forEach(taskText => {
+            const newTaskItem = document.createElement('li');
+            newTaskItem.textContent = taskText;
+            newTaskItem.classList.add('todo-item');
+            fragment.appendChild(newTaskItem);
+        });
+
+        tasksList.appendChild(fragment);
+
+        updateTaskCounter(); // Update the task counter whenever new tasks are added
+    });
+
+    // add individual tasks and update the counter accordingly
+});
