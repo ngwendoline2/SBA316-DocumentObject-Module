@@ -1,7 +1,7 @@
 head
 .completed {
     text-decoration: line-through;
-    color: #aaa;
+    color: #318e61;
 }
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -35,7 +35,7 @@ body {
     margin: 8px 0;
   }
 
-  .todo-item.completed {
+  .todo-item.completed.completed {
     text-decoration: line-through;
     color: rgb(22, 166, 209);
 }
